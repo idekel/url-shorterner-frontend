@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import {Container, Row, Col, Button} from "react-bootstrap";
+import {UrlShortener} from "./components/UrlShortener";
+import {TopVisitedShortUrls} from "./components/TopVisitedShortUrls";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+    constructor(props) {
+        super(props);
+        this.state = {showTopOneHundred: false};
+    }
+
+    get mainLinkLabel() {
+        if (!this.state.showTopOneHundred) {
+            return 'Show top 100 most visited';
+        }
+        return 'Go back';
+    }
+
+    render() {
+        let element = '';
+        if (!this.state.showTopOneHundred) {
+            element = <UrlShortener/>;
+        } else {
+            element = <TopVisitedShortUrls/>
+        }
+        return (
+            <div className="App">
+                <Container>
+                    <Row>
+                        <Col>
+                            <Button variant="link" onClick={() => this.setState({showTopOneHundred: !this.state.showTopOneHundred})}>
+                                {this.mainLinkLabel}
+                            </Button>
+                        </Col>
+                    </Row>
+                    {element}
+                </Container>
+            </div>
+        );
+    }
 }
 
 export default App;
