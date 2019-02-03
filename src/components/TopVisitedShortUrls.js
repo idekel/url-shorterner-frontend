@@ -1,7 +1,6 @@
 import React from 'react'
 import {ShortUrlCard} from "./ShortUrlCard";
 import {ShortUrlService} from "../ShortUrlService";
-import {Row, Col} from "react-bootstrap";
 
 export class TopVisitedShortUrls extends React.Component {
 
