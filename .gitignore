@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-package-lock.json
+.idea
+url-shorterner-frontend.iml
 
 # testing
 /coverage
