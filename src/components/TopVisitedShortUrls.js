@@ -8,6 +8,9 @@ export class TopVisitedShortUrls extends React.Component {
         super(props);
         this.state = {shortUrls: null};
         this.service = new ShortUrlService();
+    }
+
+    componentDidMount() {
         this.service.getTopMostVisited().then((reponse) => {
             this.setState({shortUrls: reponse.data})
         });

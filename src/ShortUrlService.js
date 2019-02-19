@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export class ShortUrlService {
-    URl = 'http://localhost/'
+    URl = 'http://localhost/';
 
     shortUrl(longUrl) {
         return axios.put(this.URl + 'api/short/url', {url: longUrl});

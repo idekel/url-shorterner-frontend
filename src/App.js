@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import './App.css';
-import {Container, Row, Col, Button} from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import {UrlShortener} from "./components/UrlShortener";
 import {TopVisitedShortUrls} from "./components/TopVisitedShortUrls";
+import {Header} from "./components/Header";
+import {Login} from "./components/Login";
 
 class App extends Component {
 
@@ -11,31 +14,20 @@ class App extends Component {
         this.state = {showTopOneHundred: false};
     }
 
-    get mainLinkLabel() {
-        if (!this.state.showTopOneHundred) {
-            return 'Show top 100 most visited';
-        }
-        return 'Go back';
-    }
-
     render() {
-        let element = '';
-        if (!this.state.showTopOneHundred) {
-            element = <UrlShortener/>;
-        } else {
-            element = <TopVisitedShortUrls/>
-        }
         return (
             <div className="App">
                 <Container>
-                    <Row>
-                        <Col>
-                            <Button variant="link" onClick={() => this.setState({showTopOneHundred: !this.state.showTopOneHundred})}>
-                                {this.mainLinkLabel}
-                            </Button>
-                        </Col>
-                    </Row>
-                    {element}
+                    <BrowserRouter>
+                        <div>
+                            <Header/>
+                            <Switch>
+                                <Route exact path="/" component={UrlShortener}/>
+                                <Route path="/top/100" component={TopVisitedShortUrls}/>
+                                <Route path="/login" component={Login}/>
+                            </Switch>
+                        </div>
+                    </BrowserRouter>
                 </Container>
             </div>
         );
